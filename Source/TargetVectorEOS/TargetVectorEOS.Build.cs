@@ -26,6 +26,8 @@ public class TargetVectorEOS : ModuleRules
 			new string[]
 			{
 				"Core",
+				"OnlineSubsystem",
+				"OnlineSubsystemEOS",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
