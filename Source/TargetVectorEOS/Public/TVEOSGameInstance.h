@@ -58,7 +58,12 @@ public:
 
 	virtual void Init() override;
 
+	UFUNCTION(BlueprintCallable)
+	bool IsLoggedIn() const;
+
+	UFUNCTION(BlueprintCallable)
 	void Login();
+
 	void OnLoginComplete(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error);
 
 	UFUNCTION(BlueprintCallable)
@@ -115,7 +120,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		int32 GetSessionMaxSlots(int32 SessionIndex);
-
 
 protected:
 	class IOnlineSubsystem* OnlineSubsystem;

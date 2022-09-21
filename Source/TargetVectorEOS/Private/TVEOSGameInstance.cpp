@@ -26,6 +26,11 @@ void UTVEOSGameInstance::Init()
 	Login();
 }
 
+bool UTVEOSGameInstance::IsLoggedIn() const
+{
+	return bIsLoggedIn;
+}
+
 void UTVEOSGameInstance::Login()
 {
 	if (OnlineSubsystem)
