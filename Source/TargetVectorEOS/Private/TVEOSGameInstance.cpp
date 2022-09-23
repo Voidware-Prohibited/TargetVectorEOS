@@ -103,7 +103,7 @@ void UTVEOSGameInstance::OnCreateSessionComplete(FName SessionName, bool bWasSuc
 		if (IOnlineSessionPtr SessionPtr = OnlineSubsystem->GetSessionInterface())
 		{
 			SessionPtr->ClearOnCreateSessionCompleteDelegates(this);
-			GetWorld()->ServerTravel(FString("L_TVEOS?listen"));
+			GetWorld()->ServerTravel(FString("L_EOSEntry?listen"));
 		}
 	}
 }
