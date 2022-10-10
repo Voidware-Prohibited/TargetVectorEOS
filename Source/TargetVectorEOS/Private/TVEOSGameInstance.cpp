@@ -10,6 +10,7 @@
 #include "Interfaces/OnlineExternalUIInterface.h"
 #include "Interfaces/OnlineFriendsInterface.h"
 #include "Kismet/GameplayStatics.h"
+#include "Settings/SessionSettings.h"
 
 const FName EOSSessionName = FName(TEXT("EOSGameSession"));
 
@@ -61,7 +62,7 @@ void UTVEOSGameInstance::OnLoginComplete(int32 LocalUserNum, bool bWasSuccessful
 	}
 }
 
-void UTVEOSGameInstance::CreateSession()
+void UTVEOSGameInstance::CreateSession(FSesssionSettings EOSSessionSettings)
 {
 	if (bIsLoggedIn)
 	{
@@ -72,10 +73,13 @@ void UTVEOSGameInstance::CreateSession()
 				FOnlineSessionSettings SessionSettings;
 
 				SessionSettings.bIsDedicated = false;
-				SessionSettings.bShouldAdvertise = true;
+				// SessionSettings.bShouldAdvertise = true;
+				SessionSettings.bShouldAdvertise = EOSSessionSettings.Private;
 				SessionSettings.bIsLANMatch = false;
-				SessionSettings.NumPublicConnections = 5;
-				SessionSettings.bAllowJoinInProgress = true;
+				// SessionSettings.NumPublicConnections = 5;
+				SessionSettings.NumPublicConnections = EOSSessionSettings.PlayersMax;
+				// SessionSettings.bAllowJoinInProgress = true;
+				SessionSettings.bAllowJoinInProgress = EOSSessionSettings.Locked;
 				SessionSettings.bAllowJoinViaPresence = true;
 				SessionSettings.bUsesPresence = true;
 				SessionSettings.bUseLobbiesIfAvailable = true;
@@ -231,6 +235,11 @@ void UTVEOSGameInstance::OnFindAllSessionsComplete(bool bWasSuccessful)
 		}
 	}
 }
+
+// void UTVEOSGameInstance::GetSessions(Array<FOnlineSessionSearchResult*>& Sessions)
+// {
+// 	return Sessions;
+// }
 
 void UTVEOSGameInstance::JoinSessionByIndex(int32 SessionIndex)
 {

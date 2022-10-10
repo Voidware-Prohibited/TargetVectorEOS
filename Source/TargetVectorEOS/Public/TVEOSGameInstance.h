@@ -6,6 +6,7 @@
 #include "OnlineSessionSettings.h"
 #include "Engine/GameInstance.h"
 #include "Interfaces/OnlineSessionInterface.h"
+#include "Settings/SessionSettings.h"
 #include "TVEOSGameInstance.generated.h"
 
 /**
@@ -66,8 +67,11 @@ public:
 
 	void OnLoginComplete(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error);
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
+	FSesssionFilter PlayerSesssionFilter;
+
 	UFUNCTION(BlueprintCallable)
-		void CreateSession();
+	void CreateSession(FSesssionSettings EOSSessionSettings);
 
 	UFUNCTION(BlueprintCallable)
 		void OnCreateSessionComplete(FName SessionName, bool bWasSuccessful);
@@ -103,8 +107,11 @@ public:
 
 	TArray<FOnlineSessionSearchResult> Sessions;
 
+	// UFUNCTION(BlueprintCallable)
+	// void GetSessions(TArray<FOnlineSessionSearchResult> &Sessions);
+
 	UFUNCTION(BlueprintCallable)
-		int32 GetNumOfSessions();
+	int32 GetNumOfSessions();
 
 	UFUNCTION(BlueprintCallable)
 		FString GetSessionID(int32 SessionIndex);
