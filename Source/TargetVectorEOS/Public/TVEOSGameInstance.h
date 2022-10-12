@@ -71,7 +71,7 @@ public:
 	FSesssionFilter PlayerSesssionFilter;
 
 	UFUNCTION(BlueprintCallable)
-	void CreateSession(FSesssionSettings EOSSessionSettings);
+	void CreateSession(FTVSesssionSettings EOSSessionSettings);
 
 	UFUNCTION(BlueprintCallable)
 		void OnCreateSessionComplete(FName SessionName, bool bWasSuccessful);
@@ -109,6 +109,9 @@ public:
 
 	// UFUNCTION(BlueprintCallable)
 	// void GetSessions(TArray<FOnlineSessionSearchResult> &Sessions);
+
+	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
+	TArray<FSessionSearchResult> SearchResults;
 
 	UFUNCTION(BlueprintCallable)
 	int32 GetNumOfSessions();

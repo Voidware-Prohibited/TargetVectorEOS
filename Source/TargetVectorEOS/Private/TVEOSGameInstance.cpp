@@ -62,7 +62,7 @@ void UTVEOSGameInstance::OnLoginComplete(int32 LocalUserNum, bool bWasSuccessful
 	}
 }
 
-void UTVEOSGameInstance::CreateSession(FSesssionSettings EOSSessionSettings)
+void UTVEOSGameInstance::CreateSession(FTVSesssionSettings EOSSessionSettings)
 {
 	if (bIsLoggedIn)
 	{
@@ -220,10 +220,121 @@ void UTVEOSGameInstance::OnFindAllSessionsComplete(bool bWasSuccessful)
 			if (SearchSettings->SearchResults.Num() > 0)
 			{
 				SessionPtr->OnJoinSessionCompleteDelegates.AddUObject(
-					this, &UTVEOSGameInstance::OnJoinSessionComplete);;
+					this, &UTVEOSGameInstance::OnJoinSessionComplete);
+				int index{ -1 };
 				for (FOnlineSessionSearchResult Session : SearchSettings->SearchResults)
 				{
 					UE_LOG(LogTemp, Warning, TEXT("Found Session: %s"), *Session.GetSessionIdStr());
+					index = ++index;
+					FSessionSearchResult SearchResultLocal;
+					FTVOnlineSession OnlineSessionLocal;
+					FTVOnlineSessionSettings OnlineSessionSettingsLocal;
+
+					//FOnlineSessionSearchResult
+
+					/** Index ref of the session in SearchResults */
+					SearchResultLocal.SearchResultIndex = index;
+
+					// SESSION FOnlineSession -> FTVOnlineSession
+					/** Owner ID of the session */
+					//SearchResultLocal.Session.OwningUserId = Session.Session.OwningUserId;
+
+					/** Owner name of the session */
+					SearchResultLocal.Session.OwningUserName = Session.Session.OwningUserName;
+
+					//SESSIONSETTINGS FOnlineSessionSettings -> FTVOnlineSessionSettings
+
+					/** The number of publicly available connections advertised */
+					SearchResultLocal.Session.SessionSettings.NumPublicConnections = Session.Session.SessionSettings.NumPublicConnections;
+
+					/** The number of connections that are private (invite/password) only */
+					SearchResultLocal.Session.SessionSettings.NumPrivateConnections = Session.Session.SessionSettings.NumPrivateConnections;
+
+					/** Whether this match is publicly advertised on the online service */
+					SearchResultLocal.Session.SessionSettings.bShouldAdvertise = Session.Session.SessionSettings.bShouldAdvertise;
+
+					/** Whether joining in progress is allowed or not */
+					SearchResultLocal.Session.SessionSettings.bAllowJoinInProgress = Session.Session.SessionSettings.bAllowJoinInProgress;
+
+					/** This game will be lan only and not be visible to external players */
+					SearchResultLocal.Session.SessionSettings.bIsLANMatch = Session.Session.SessionSettings.bIsLANMatch;
+
+					/** Whether the server is dedicated or player hosted */
+					SearchResultLocal.Session.SessionSettings.bIsDedicated = Session.Session.SessionSettings.bIsDedicated;
+
+					/** Whether the match should gather stats or not */
+					SearchResultLocal.Session.SessionSettings.bUsesStats = Session.Session.SessionSettings.bUsesStats;
+
+					/** Whether the match allows invitations for this session or not */
+					SearchResultLocal.Session.SessionSettings.bAllowInvites = Session.Session.SessionSettings.bAllowInvites;
+
+					/** Whether to display user presence information or not */
+					SearchResultLocal.Session.SessionSettings.bUsesPresence = Session.Session.SessionSettings.bUsesPresence;
+
+					/** Whether joining via player presence is allowed or not */
+					SearchResultLocal.Session.SessionSettings.bAllowJoinViaPresence = Session.Session.SessionSettings.bAllowJoinViaPresence;
+
+					/** Whether joining via player presence is allowed for friends only or not */
+					SearchResultLocal.Session.SessionSettings.bAllowJoinViaPresenceFriendsOnly = Session.Session.SessionSettings.bAllowJoinViaPresenceFriendsOnly;
+
+					/** Whether the server employs anti-cheat (punkbuster, vac, etc) */
+					SearchResultLocal.Session.SessionSettings.bAntiCheatProtected = Session.Session.SessionSettings.bAntiCheatProtected;
+
+					/** Whether to prefer lobbies APIs if the platform supports them */
+					SearchResultLocal.Session.SessionSettings.bUseLobbiesIfAvailable = Session.Session.SessionSettings.bUseLobbiesIfAvailable;
+
+					/** Whether to create (and auto join) a voice chat room for the lobby, if the platform supports it */
+					SearchResultLocal.Session.SessionSettings.bUseLobbiesVoiceChatIfAvailable = Session.Session.SessionSettings.bUseLobbiesVoiceChatIfAvailable;
+
+					/** Used to keep different builds from seeing each other during searches */
+					SearchResultLocal.Session.SessionSettings.BuildUniqueId = Session.Session.SessionSettings.BuildUniqueId;
+
+					/** Array of custom session settings */
+					//FOR LOOP
+					//SearchResultLocal.Session.SessionSettings.Settings = Session.Session.SessionSettings.Settings;
+
+					TArray<FName> KeyArray {};
+					//TArray<UObject*> ValueArray;
+					TArray<FString> ValueArray {};
+					TMap<FName, FString> SessionSettingsLocal = {};
+					SearchResultLocal.Session.SessionSettings.Settings.GenerateKeyArray(KeyArray);
+
+					for(auto i : KeyArray){
+					
+						// SearchResultLocal.Session.SessionSettings.Settings = Session.Session.SessionSettings.Settings.GenerateValueArray(ValueArray);
+						//SearchResultLocal.Session.SessionSettings.Settings.FindRef(i).ToString();
+						FString ValueData;
+						ValueData = Session.Session.SessionSettings.Settings.FindRef(i).Data.ToString();
+						ValueArray.Add(ValueData);
+					}
+
+					for (auto i = 0; i < KeyArray.Num(); i++) {
+						SessionSettingsLocal[KeyArray[i]] = ValueArray[i];
+					}
+
+					/** The platform specific session information */
+					// TSharedPtr<class FOnlineSessionInfo> SessionInfo;
+
+					/** The number of private connections that are available (read only) */
+					SearchResultLocal.Session.NumOpenPrivateConnections = Session.Session.NumOpenPrivateConnections;
+
+					/** The number of publicly available connections that are available (read only) */
+					SearchResultLocal.Session.NumOpenPublicConnections = Session.Session.NumOpenPublicConnections;
+					
+					// FSessionSearchResult
+					// FTVOnlineSession
+					// FTVOnlineSessionSettings
+					// FTVSesssionSettings
+
+					//FOnlineSessionSearchResult
+
+					SearchResultLocal.PingInMs = Session.PingInMs;
+					SearchResultLocal.IsValid = Session.IsValid();
+					SearchResultLocal.IsSessionInfoValid = Session.IsSessionInfoValid();
+					SearchResultLocal.SessionIdStr = Session.GetSessionIdStr();
+
+					SearchResults.Add(SearchResultLocal);
+					// SearchResults
 				}
 				this->Sessions = SearchSettings->SearchResults;
 			}
