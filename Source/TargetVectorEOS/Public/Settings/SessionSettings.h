@@ -7,15 +7,17 @@
 UENUM(BlueprintType)
 enum class EDifficulty : uint8
 {
-	VeryEasy,
+	VeryLight,
 	Easy,
 	Normal,
-	Hard,
+	Heavy,
 	Realistic,
-	VeryHard,
+	VeryHeavy,
 	Extreme,
 	Custom,
+	Count UMETA(Hidden)
 };
+ENUM_RANGE_BY_COUNT(EDifficulty, EDifficulty::Count);
 
 UENUM(BlueprintType)
 enum class EAILevel : uint8
@@ -26,7 +28,20 @@ enum class EAILevel : uint8
 	Advanced,
 	Ultra,
 	Custom,
+	Count UMETA(Hidden)
 };
+ENUM_RANGE_BY_COUNT(EAILevel, EAILevel::Count);
+
+UENUM(BlueprintType)
+enum class EPartOfDay : uint8
+{
+	Morning,
+	Afternoon,
+	Evening,
+	Night,
+	Count UMETA(Hidden)
+};
+ENUM_RANGE_BY_COUNT(EPartOfDay, EPartOfDay::Count);
 
 USTRUCT(BlueprintType)
 struct FTVOnlineSessionSetting
