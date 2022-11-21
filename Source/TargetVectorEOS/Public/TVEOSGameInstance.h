@@ -59,77 +59,86 @@ public:
 
 	virtual void Init() override;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Login")
 	bool IsLoggedIn() const;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Login")
 	void Login();
 
 	void OnLoginComplete(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Game Instance|Session", Meta = (AllowPrivateAccess))
 	FSesssionFilter PlayerSesssionFilter;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Session")
 	void CreateSession(FTVSesssionSettings EOSSessionSettings);
 
-	UFUNCTION(BlueprintCallable)
-		void OnCreateSessionComplete(FName SessionName, bool bWasSuccessful);
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Session")
+	void OnCreateSessionComplete(FName SessionName, bool bWasSuccessful);
 
-	UFUNCTION(BlueprintCallable)
-		void DestroySession();
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Session")
+	void DestroySession();
 	void OnDestroySessionComplete(FName SessionName, bool bWasSuccessful);
 
-	UFUNCTION(BlueprintCallable)
-		void FindFirstSession();
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Session")
+	void FindFirstSession();
 	void OnFindFirstSessionComplete(bool bWasSuccessful);
 
-	UFUNCTION(BlueprintCallable)
-		void FindAllSessions();
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Session")
+	void FindAllSessions();
 	void OnFindAllSessionsComplete(bool bWasSuccessful);
 
-	UFUNCTION(BlueprintCallable)
-		void JoinSessionByIndex(int32 SessionIndex);
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Session")
+	void JoinSessionByIndex(int32 SessionIndex);
 
 	TSharedPtr<FOnlineSessionSearch> SearchSettings;
 
 	void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result);
 
-	UFUNCTION(BlueprintCallable)
-		void GetAllFriends();
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Friends")
+	void GetAllFriends();
 	void OnGetAllFriendsComplete(int32 LocalUserNum, bool bWasSuccessful, const FString& ListName, const FString& ErrorStr);
 
-	UFUNCTION(BlueprintCallable)
-		void ShowFriendsList();
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Friends")
+	void ShowFriendsList();
 
-	UFUNCTION(BlueprintCallable)
-		void ShowInviteUI();
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Friends")
+	void ShowInviteUI();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Game Instance|State", Meta = (AllowPrivateAccess))
+	EInstanceState InstanceState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Game Instance|State", Meta = (AllowPrivateAccess))
+	bool bIsNewInstance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Game Instance|State", Meta = (AllowPrivateAccess))
+	ESessionType SessionType;
 
 	TArray<FOnlineSessionSearchResult> Sessions;
 
 	// UFUNCTION(BlueprintCallable)
 	// void GetSessions(TArray<FOnlineSessionSearchResult> &Sessions);
 
-	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
+	UPROPERTY(BlueprintReadOnly, Category = "Game Instance|Session", Meta = (AllowPrivateAccess))
 	TArray<FSessionSearchResult> SearchResults;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Session")
 	int32 GetNumOfSessions();
 
-	UFUNCTION(BlueprintCallable)
-		FString GetSessionID(int32 SessionIndex);
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Session")
+	FString GetSessionID(int32 SessionIndex);
 
-	UFUNCTION(BlueprintCallable)
-		FString GetSessionOwnerName(int32 SessionIndex);
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Session")
+	FString GetSessionOwnerName(int32 SessionIndex);
 
-	UFUNCTION(BlueprintCallable)
-		FString GetPlayerName();
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Player")
+	FString GetPlayerName();
 
-	UFUNCTION(BlueprintCallable)
-		int32 GetSessionPing(int32 SessionIndex);
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Session")
+	int32 GetSessionPing(int32 SessionIndex);
 
-	UFUNCTION(BlueprintCallable)
-		int32 GetSessionMaxSlots(int32 SessionIndex);
+	UFUNCTION(BlueprintCallable, Category = "Game Instance|Session")
+	int32 GetSessionMaxSlots(int32 SessionIndex);
 
 protected:
 	class IOnlineSubsystem* OnlineSubsystem;

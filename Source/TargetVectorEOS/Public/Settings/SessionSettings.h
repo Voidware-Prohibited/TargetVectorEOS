@@ -5,16 +5,36 @@
 #include "SessionSettings.generated.h"
 
 UENUM(BlueprintType)
+enum class EInstanceState : uint8
+{
+	Loading	UMETA(DisplayName = "Loading"),
+	MainMenu	UMETA(DisplayName = "Main Menu"),
+	InGame	UMETA(DisplayName = "In Game"),
+	Count UMETA(Hidden)
+};
+ENUM_RANGE_BY_COUNT(EInstanceState, EInstanceState::Count);
+
+UENUM(BlueprintType)
+enum class ESessionType : uint8
+{
+	SinglePlayer	UMETA(DisplayName = "Single Player"),
+	Coop	UMETA(DisplayName = "Co-Op"),
+	Multiplayer	UMETA(DisplayName = "Multiplayer"),
+	Count UMETA(Hidden)
+};
+ENUM_RANGE_BY_COUNT(ESessionType, ESessionType::Count);
+
+UENUM(BlueprintType)
 enum class EDifficulty : uint8
 {
-	VeryLight,
-	Easy,
-	Normal,
-	Heavy,
-	Realistic,
-	VeryHeavy,
-	Extreme,
-	Custom,
+	VeryLight	UMETA(DisplayName = "Very Light"),
+	Easy	UMETA(DisplayName = "Easy"),
+	Normal	UMETA(DisplayName = "Normal"),
+	Heavy	UMETA(DisplayName = "Heavy"),
+	Realistic	UMETA(DisplayName = "Realistic"),
+	VeryHeavy	UMETA(DisplayName = "Very Heavy"),
+	Extreme	UMETA(DisplayName = "Extreme"),
+	Custom	UMETA(DisplayName = "Custom"),
 	Count UMETA(Hidden)
 };
 ENUM_RANGE_BY_COUNT(EDifficulty, EDifficulty::Count);
@@ -22,12 +42,12 @@ ENUM_RANGE_BY_COUNT(EDifficulty, EDifficulty::Count);
 UENUM(BlueprintType)
 enum class EAILevel : uint8
 {
-	VeryBasic,
-	Basic,
-	Normal,
-	Advanced,
-	Ultra,
-	Custom,
+	VeryBasic	UMETA(DisplayName = "Very Basic"),
+	Basic	UMETA(DisplayName = "Basic"),
+	Normal	UMETA(DisplayName = "Normal"),
+	Advanced	UMETA(DisplayName = "Advanced"),
+	Ultra	UMETA(DisplayName = "Ultra"),
+	Custom	UMETA(DisplayName = "Custom"),
 	Count UMETA(Hidden)
 };
 ENUM_RANGE_BY_COUNT(EAILevel, EAILevel::Count);
@@ -35,10 +55,10 @@ ENUM_RANGE_BY_COUNT(EAILevel, EAILevel::Count);
 UENUM(BlueprintType)
 enum class EPartOfDay : uint8
 {
-	Morning,
-	Afternoon,
-	Evening,
-	Night,
+	Morning	UMETA(DisplayName = "Morning"),
+	Afternoon	UMETA(DisplayName = "Afternoon"),
+	Evening	UMETA(DisplayName = "Evening"),
+	Night	UMETA(DisplayName = "Night"),
 	Count UMETA(Hidden)
 };
 ENUM_RANGE_BY_COUNT(EPartOfDay, EPartOfDay::Count);
