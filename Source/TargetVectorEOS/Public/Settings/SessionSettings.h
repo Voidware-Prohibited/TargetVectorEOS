@@ -72,7 +72,7 @@ struct FTVOnlineSessionSetting
 	FString Data;
 
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	int32 ID;
+	int32 ID {0};
 
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
 	FString EOnlineDataAdvertisementType;
@@ -85,63 +85,63 @@ struct TARGETVECTOREOS_API FTVOnlineSessionSettings
 
 	/** The number of publicly available connections advertised */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	int32 NumPublicConnections;
+	int32 NumPublicConnections {0};
 
 	/** The number of connections that are private (invite/password) only */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	int32 NumPrivateConnections;
+	int32 NumPrivateConnections {0};
 
 	/** Whether this match is publicly advertised on the online service */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool bShouldAdvertise;
+	bool bShouldAdvertise {true};
 
 	/** Whether joining in progress is allowed or not */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool bAllowJoinInProgress;
+	bool bAllowJoinInProgress {true};
 
 	/** This game will be lan only and not be visible to external players */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool bIsLANMatch;
+	bool bIsLANMatch {false};
 
 	/** Whether the server is dedicated or player hosted */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool bIsDedicated;
+	bool bIsDedicated {false};
 
 	/** Whether the match should gather stats or not */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool bUsesStats;
+	bool bUsesStats {true};
 
 	/** Whether the match allows invitations for this session or not */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool bAllowInvites;
+	bool bAllowInvites {true};
 
 	/** Whether to display user presence information or not */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool bUsesPresence;
+	bool bUsesPresence {true};
 
 	/** Whether joining via player presence is allowed or not */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool bAllowJoinViaPresence;
+	bool bAllowJoinViaPresence {true};
 
 	/** Whether joining via player presence is allowed for friends only or not */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool bAllowJoinViaPresenceFriendsOnly;
+	bool bAllowJoinViaPresenceFriendsOnly {false};
 
 	/** Whether the server employs anti-cheat (punkbuster, vac, etc) */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool bAntiCheatProtected;
+	bool bAntiCheatProtected {false};
 
 	/** Whether to prefer lobbies APIs if the platform supports them */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool bUseLobbiesIfAvailable;
+	bool bUseLobbiesIfAvailable {true};
 
 	/** Whether to create (and auto join) a voice chat room for the lobby, if the platform supports it */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool bUseLobbiesVoiceChatIfAvailable;
+	bool bUseLobbiesVoiceChatIfAvailable {true};
 
 	/** Used to keep different builds from seeing each other during searches */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	int32 BuildUniqueId;
+	int32 BuildUniqueId {0};
 
 	/** Array of custom session settings */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
@@ -171,11 +171,11 @@ struct TARGETVECTOREOS_API FTVOnlineSession
 
 	/** The number of private connections that are available (read only) */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	int32 NumOpenPrivateConnections;
+	int32 NumOpenPrivateConnections {0};
 
 	/** The number of publicly available connections that are available (read only) */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	int32 NumOpenPublicConnections;
+	int32 NumOpenPublicConnections {0};
 };
 
 USTRUCT(BlueprintType)
@@ -190,31 +190,31 @@ struct TARGETVECTOREOS_API FTVSesssionSettings
 	FText Level;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	int PlayersMin{ 1 };
+	int PlayersMin {1};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	int PlayersMax{ 100 };
+	int PlayersMax {100};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
 	FDateTime DateTime;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	int Difficulty{ 2 };
+	int Difficulty {2};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	int AILevel{ 2 };
+	int AILevel {2};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	bool Private{ false };
+	bool Private {false};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	bool HasPassword{ false };
+	bool HasPassword {false};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
 	FText Password;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	bool Locked{ false };
+	bool Locked {false};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
 	bool AllowJoinInProgress{ true };
@@ -226,7 +226,7 @@ struct TARGETVECTOREOS_API FSesssionFilter
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	bool Favorite;
+	bool Favorite {false};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
 	FText ServerName;
@@ -235,10 +235,10 @@ struct TARGETVECTOREOS_API FSesssionFilter
 	FText Level;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	int PlayersMin;
+	int PlayersMin {1};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	int PlayersMax;
+	int PlayersMax {100};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
 	FText Time;
@@ -250,16 +250,16 @@ struct TARGETVECTOREOS_API FSesssionFilter
 	FText AILevel;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	bool HasPassword;
+	bool HasPassword {false};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
 	FText Password;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	bool Locked;
+	bool Locked {false};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	float PingMax;
+	float PingMax {0.0f};
 };
 
 USTRUCT(BlueprintType)
@@ -268,7 +268,7 @@ struct TARGETVECTOREOS_API FSessionSearchResult
 	GENERATED_BODY()
 
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	int32 SearchResultIndex;
+	int32 SearchResultIndex {0};
 
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
 	FTVOnlineSession Session;
@@ -291,20 +291,20 @@ struct TARGETVECTOREOS_API FSessionSearchResult
 
 	/** The number of private connections that are available (read only) */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	int32 NumOpenPrivateConnections;
+	int32 NumOpenPrivateConnections {0};
 
 	/** The number of publicly available connections that are available (read only) */
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	int32 NumOpenPublicConnections;
+	int32 NumOpenPublicConnections {0};
 
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	int32 PingInMs;
+	int32 PingInMs {0};
 
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool IsValid;
+	bool IsValid {false};
 
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
-	bool IsSessionInfoValid;
+	bool IsSessionInfoValid {false};
 
 	UPROPERTY(BlueprintReadOnly, Meta = (AllowPrivateAccess))
 	FString SessionIdStr;
@@ -325,20 +325,20 @@ struct TARGETVECTOREOS_API FLevelInfo
 	TArray<TSoftObjectPtr<UTexture2D>> LevelImages;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	bool New;
+	bool New {false};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	bool Featured;
+	bool Featured {false};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	bool Destructable;
+	bool Destructable {false};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	bool Events;
+	bool Events {false};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	int RecommendedPlayersMin;
+	int RecommendedPlayersMin {0};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
-	int RecommendedPlayersMax;
+	int RecommendedPlayersMax {0};
 };
