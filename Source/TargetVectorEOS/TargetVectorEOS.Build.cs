@@ -26,6 +26,7 @@ public class TargetVectorEOS : ModuleRules
 			new string[]
 			{
 				"Core",
+				"GameplayTags",
 				"OnlineSubsystem",
 				"OnlineSubsystemEOS",
 				// ... add other public dependencies that you statically link with here ...

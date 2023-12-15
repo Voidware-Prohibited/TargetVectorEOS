@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/EngineTypes.h"
+#include "NativeGameplayTags.h"
 #include "OnlineSessionSettings.h"
 #include "SessionSettings.generated.h"
 
@@ -188,6 +189,9 @@ struct TARGETVECTOREOS_API FTVSesssionSettings
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
 	FText Level;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (Categories = "Game.Base Game Mode", AllowPrivateAccess))
+	FGameplayTag BaseGameMode;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (AllowPrivateAccess))
 	int PlayersMin {1};
