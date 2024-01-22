@@ -2,7 +2,6 @@
 
 #include "Engine/EngineTypes.h"
 #include "NativeGameplayTags.h"
-#include "OnlineSessionSettings.h"
 #include "SessionSettings.generated.h"
 
 UENUM(BlueprintType)
